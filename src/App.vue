@@ -25,7 +25,7 @@
       <TypingBox :msg="randomAdvices" />
     </section>
 
-    <footer>푸터</footer>
+    <FooterSection />
   </div>
 </template>
 
@@ -34,6 +34,7 @@ import { ref } from 'vue';
 import TypingBox from './components/TypingBox.vue';
 import { advices } from './api/advices';
 import MdiIcons from './components/MdiIcons.vue';
+import FooterSection from './components/FooterSection.vue';
 
 const onFullscreen = () => {
   document.documentElement.requestFullscreen();

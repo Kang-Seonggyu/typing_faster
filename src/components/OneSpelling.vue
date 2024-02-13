@@ -1,12 +1,13 @@
 <template>
   <div class="spelling">
-    <span>{{ $props.spell }}</span>
-    <span>{{ $props.typing }}</span>
+    <span :class="props.typing && props.typing !== props.spell && 'incorrect'">
+      {{ props.spell }}
+    </span>
   </div>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   spell: { type: String, required: true },
   typing: { type: String },
 });
@@ -15,10 +16,15 @@ defineProps({
 <style scoped>
 .spelling {
   display: inline-block;
-  word-spacing: 10px;
   white-space: pre;
 }
 span {
   color: #999;
+}
+span.incorrect {
+  position: relative;
+  z-index: 10;
+  color: rgba(255, 0, 0, 0.7);
+  font-weight: bold;
 }
 </style>

@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import MdiIcons from './MdiIcons.vue';
+import MdiIcons from '../components/MdiIcons.vue';
 </script>
 
 <style scoped>

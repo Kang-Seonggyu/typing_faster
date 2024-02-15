@@ -9,13 +9,62 @@
       <span>typing_faster</span>
     </h1>
     <div class="buttons">
-      <MdiIcons :path="'mdiCog'" :button="true" :size="26" tooltip="기본설정" />
+      <MdiIcons
+        :path="'mdiCog'"
+        :button="true"
+        :size="26"
+        tooltip="기본설정"
+        @click="
+          () => {
+            abcSettingOpen = false;
+            basicSettingOpen = !basicSettingOpen;
+          }
+        "
+      />
+      <SettingMenu
+        :open="basicSettingOpen"
+        top="64px"
+        right="70px"
+        @close-menu="(e) => (basicSettingOpen = e)"
+      >
+        <template #header>
+          <div>설정</div>
+        </template>
+        <template #default>
+          <ToggleSwitch @checkbox-click="$emit('modeClick')" label="다크모드" />
+        </template>
+      </SettingMenu>
       <MdiIcons
         :path="'mdiAlphabeticalVariant'"
         :button="true"
         :size="26"
         tooltip="언어설정"
+        @click="
+          () => {
+            basicSettingOpen = false;
+            abcSettingOpen = !abcSettingOpen;
+          }
+        "
       />
+      <SettingMenu
+        :open="abcSettingOpen"
+        top="64px"
+        right="30px"
+        @close-menu="(e) => (abcSettingOpen = e)"
+      >
+        <template #header> 언어설정 </template>
+        <template #default>
+          <div>
+            <label>Color</label>
+          </div>
+          <div>
+            <label>Weight</label>
+          </div>
+          <div>
+            <label>Size</label>
+          </div>
+        </template>
+      </SettingMenu>
       <MdiIcons
         v-if="fullscreenFlag"
         :path="'mdiFullscreenExit'"
@@ -38,11 +87,18 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import MdiIcons from '../components/MdiIcons.vue';
+import MdiIcons from '../components/common/MdiIcons.vue';
+import SettingMenu from '../components/SettingMenu.vue';
+import ToggleSwitch from '../components/common/ToggleSwitch.vue';
 
 const reloadPage = () => {
   window.location.reload();
 };
+
+defineEmits(['modeClick']);
+
+const basicSettingOpen = ref(null);
+const abcSettingOpen = ref(null);
 
 const fullscreenFlag = ref(false);
 const onFullscreen = () => {
@@ -65,7 +121,9 @@ onMounted(() => {
   document.addEventListener('fullscreenchange', fullscreenchanged);
 });
 
-onBeforeUnmount(() => {});
+onBeforeUnmount(() => {
+  document.removeEventListener('fullscreenchange');
+});
 </script>
 
 <style scoped>

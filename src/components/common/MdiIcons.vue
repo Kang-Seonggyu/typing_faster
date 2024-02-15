@@ -35,10 +35,13 @@ onMounted(() => {
 .button {
   position: relative;
   display: flex;
-  padding: 2px 4px;
+
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.2rem 0.6rem 0rem;
+}
+.button svg {
+  padding: 2px 4px;
 }
 .button:hover {
   cursor: pointer;

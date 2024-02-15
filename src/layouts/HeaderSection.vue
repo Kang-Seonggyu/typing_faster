@@ -59,9 +59,11 @@
           </div>
           <div>
             <label>Weight</label>
+            <RangeSlider width="100px" :value="39" :step="10" />
           </div>
           <div>
             <label>Size</label>
+            <RangeSlider width="100px" />
           </div>
         </template>
       </SettingMenu>
@@ -90,6 +92,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 import MdiIcons from '../components/common/MdiIcons.vue';
 import SettingMenu from '../components/SettingMenu.vue';
 import ToggleSwitch from '../components/common/ToggleSwitch.vue';
+import RangeSlider from '../components/common/RangeSlider.vue';
 
 const reloadPage = () => {
   window.location.reload();

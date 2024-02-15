@@ -9,14 +9,20 @@
       <span>typing_faster</span>
     </h1>
     <div class="buttons">
-      <MdiIcons :path="'mdiCog'" :button="true" :size="26" />
-      <MdiIcons :path="'mdiAlphabeticalVariant'" :button="true" :size="26" />
+      <MdiIcons :path="'mdiCog'" :button="true" :size="26" tooltip="기본설정" />
+      <MdiIcons
+        :path="'mdiAlphabeticalVariant'"
+        :button="true"
+        :size="26"
+        tooltip="언어설정"
+      />
       <MdiIcons
         v-if="fullscreenFlag"
         :path="'mdiFullscreenExit'"
         :button="true"
         :size="26"
         @click="onFullscreen"
+        tooltip="화면축소"
       />
       <MdiIcons
         v-else
@@ -24,6 +30,7 @@
         :button="true"
         :size="26"
         @click="onFullscreen"
+        tooltip="화면확대"
       />
     </div>
   </header>
@@ -44,7 +51,6 @@ const onFullscreen = () => {
   } else {
     document.documentElement.requestFullscreen();
   }
-  console.log(fullscreenFlag.value);
 };
 
 function fullscreenchanged() {

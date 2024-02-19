@@ -1,9 +1,13 @@
 <template>
   <div class="container" :class="darkMode && 'dark'">
-    <HeaderSection @mode-click="darkMode = !darkMode" />
+    <HeaderSection
+      @mode-click="darkMode = !darkMode"
+      @text-control="updateText"
+      :text="text"
+    />
 
     <section>
-      <TypingBox :msg="randomAdvices" />
+      <TypingBox :msg="randomAdvices" :text="text" />
     </section>
 
     <FooterSection />
@@ -19,6 +23,13 @@ import FooterSection from './layouts/FooterSection.vue';
 import TypingBox from './components/TypingBox.vue';
 
 const darkMode = ref(false);
+const text = ref({ color: '#fff', size: 14, weight: 400 });
+
+const updateText = (e) => {
+  const { name, value } = e;
+
+  text.value[name] = value;
+};
 
 const randomAdvices = ref(advices[Math.floor(Math.random() * advices.length)]);
 </script>

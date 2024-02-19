@@ -58,12 +58,35 @@
             <label>Color</label>
           </div>
           <div>
-            <label>Weight</label>
-            <RangeSlider width="100px" :value="39" :step="10" />
+            <label>
+              Weight<em>{{ props.text.weight }}</em>
+            </label>
+            <RangeSlider
+              width="100px"
+              :min="100"
+              :max="900"
+              :value="props.text.weight"
+              :step="100"
+              @slide-value="
+                (e) =>
+                  $emit('textControl', { name: 'weight', value: Number(e) })
+              "
+            />
           </div>
           <div>
-            <label>Size</label>
-            <RangeSlider width="100px" />
+            <label>
+              Size
+              <em>{{ props.text.size }} px</em>
+            </label>
+            <RangeSlider
+              width="100px"
+              :min="8"
+              :max="40"
+              :value="props.text.size"
+              @slide-value="
+                (e) => $emit('textControl', { name: 'size', value: Number(e) })
+              "
+            />
           </div>
         </template>
       </SettingMenu>
@@ -98,7 +121,10 @@ const reloadPage = () => {
   window.location.reload();
 };
 
-defineEmits(['modeClick']);
+const props = defineProps({
+  text: { type: Object },
+});
+defineEmits(['modeClick', 'textControl']);
 
 const basicSettingOpen = ref(null);
 const abcSettingOpen = ref(null);
@@ -166,5 +192,19 @@ header .buttons {
   display: flex;
   gap: 4px;
   margin-right: 10px;
+}
+
+label {
+  display: flex;
+  color: #999;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 0 14px 0 10px;
+}
+em {
+  flex: 1;
+  text-align: right;
+  color: #007209;
+  font-size: 12px;
 }
 </style>

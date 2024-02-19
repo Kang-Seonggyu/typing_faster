@@ -7,10 +7,15 @@
       @keydown="onKeydown"
       ref="editableDiv"
       contenteditable="true"
+      :style="{
+        fontSize: props.text?.size + 'px',
+        fontWeight: props.text?.weight,
+      }"
     ></div>
     <div class="dictation__label">
       <OneSpelling
         v-for="(spell, idx) in msg.replace(/&nbsp;/g, ' ')"
+        :text="props.text"
         :key="`spell_${idx}`"
         :spell="spell"
         :typing="typingText[idx]"
@@ -30,6 +35,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import OneSpelling from './OneSpelling.vue';
 
 const props = defineProps({
+  text: { type: Object },
   msg: { type: String, required: true },
 });
 

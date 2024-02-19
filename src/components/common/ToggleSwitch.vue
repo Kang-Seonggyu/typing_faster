@@ -27,6 +27,8 @@ const toggleCheckbox = () => {
 <style scoped>
 .label {
   margin-right: 2px;
+  transition: color 1s ease-in-out;
+  color: var(--text-color);
 }
 .switch {
   position: relative;

@@ -4,7 +4,7 @@
     :max="props.max"
     :min="props.min"
     :step="props.step"
-    v-model="value"
+    :value="props.value"
     @input="updateSlider"
     :style="{ backgroundSize: backgroundSize, width: props.width }"
   />
@@ -21,8 +21,11 @@ const props = defineProps({
   step: { type: Number, default: 1 },
 });
 
-const value = ref(props.value);
-const backgroundSize = ref(`${props.value}% 100%`);
+const emits = defineEmits(['slideValue']);
+
+const backgroundSize = ref(
+  `${((props.value - props.min) / (props.max - props.min)) * 100}% 100%`
+);
 
 const updateSlider = (e) => {
   let clickedElement = e.target,
@@ -30,7 +33,8 @@ const updateSlider = (e) => {
     max = clickedElement.max,
     val = clickedElement.value;
 
-  backgroundSize.value = ((val - min) * 100) / (max - min) + '% 100%';
+  backgroundSize.value = `${((val - min) / (max - min)) * 100}% 100%`;
+  emits('slideValue', clickedElement.value);
 };
 </script>
 

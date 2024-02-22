@@ -10,12 +10,15 @@
       <TypingBox :msg="randomAdvices" :text="text" />
     </section>
 
+    <canvas ref="canvas" width="500px" height="340px"></canvas>
+
     <FooterSection />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+
 import { advices } from './api/advices';
 
 import HeaderSection from './layouts/HeaderSection.vue';
@@ -23,7 +26,7 @@ import FooterSection from './layouts/FooterSection.vue';
 import TypingBox from './components/TypingBox.vue';
 
 const darkMode = ref(false);
-const text = ref({ color: '#fff', size: 14, weight: 400 });
+const text = ref({ color: '#000', size: 16, weight: 400 });
 
 const updateText = (e) => {
   const { name, value } = e;
@@ -32,6 +35,8 @@ const updateText = (e) => {
 };
 
 const randomAdvices = ref(advices[Math.floor(Math.random() * advices.length)]);
+
+// 아래부터는 canvas
 </script>
 
 <style scoped>

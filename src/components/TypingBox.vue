@@ -10,6 +10,7 @@
       :style="{
         fontSize: props.text?.size + 'px',
         fontWeight: props.text?.weight,
+        color: props.text?.color,
       }"
     ></div>
     <div class="dictation__label">

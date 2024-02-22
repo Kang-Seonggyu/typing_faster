@@ -80,11 +80,22 @@
             </label>
             <RangeSlider
               width="100px"
-              :min="8"
+              :min="16"
               :max="40"
               :value="props.text.size"
               @slide-value="
                 (e) => $emit('textControl', { name: 'size', value: Number(e) })
+              "
+            />
+            <label>
+              Color
+              <em>{{ props.text.color }}</em>
+            </label>
+            <input
+              type="color"
+              @input="
+                (e) =>
+                  $emit('textControl', { name: 'color', value: e.target.value })
               "
             />
           </div>
